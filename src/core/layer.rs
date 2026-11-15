@@ -1,14 +1,12 @@
-use std::collections::HashMap;
+use sola_raylib::{RaylibHandle, check_collision_point_poly, color::Color, drawing::RaylibDraw, ffi::CheckCollisionPointRec, math::{Rectangle, Vector2}};
 
-use sola_raylib::{color::Color, drawing::{RaylibDraw, RaylibDrawHandle}, ffi::GetRandomValue, math::{Rectangle, Vector2}, texture::Texture2D};
-
-use crate::core::{asset_manager::get_asset_manager, entity::Entity};
+use crate::{core::{asset_manager::get_asset_manager, entity::Entity}, globals::glob};
 
 pub struct Layer {
     pub name: String,
     pub scale: f32,
     pub entities: Vec<Entity>,
-    rand_x: i32,
+    pub remove_entity_indexes: Vec<usize>,
 }
 
 impl Layer {
@@ -17,13 +15,35 @@ impl Layer {
             name: name.to_string(),
             scale,
             entities: Vec::new(),
-            rand_x: unsafe{GetRandomValue(0, 400)},
+            remove_entity_indexes: Vec::new(),
         }
     }
     
     pub fn add_entity(&mut self, x: f32, y: f32, tex: &str) {
         println!("added entity");
-        self.entities.push(Entity::new(x, y, tex));
+        let texture_w = get_asset_manager().textures[tex].width;
+        let texture_h = get_asset_manager().textures[tex].height;
+        self.entities.push(Entity::new(x, y, texture_w as f32, texture_h as f32, tex));
+    }
+    
+    pub fn remove_entity(&mut self) {
+        for (i, entity) in self.entities.iter_mut().enumerate() {
+            let wmp = glob().world_mouse_position;
+            if Rectangle::new(entity.x, entity.y, entity.width, entity.height).check_collision_point_rec(wmp) {
+                self.remove_entity_indexes.push(i);
+                break;
+            }
+        }
+    }
+    
+    pub fn process_entity_deletion(&mut self) {
+        if !self.remove_entity_indexes.is_empty() {
+                for i in self.remove_entity_indexes.iter() {
+                    self.entities.swap_remove(*i);
+                }
+            
+            self.remove_entity_indexes.clear();
+        }
     }
     
     pub fn draw_textures(&mut self, batch: &mut impl RaylibDraw, tint: Option<Color>) {

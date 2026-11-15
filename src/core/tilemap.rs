@@ -1,5 +1,5 @@
 use ldtk_rust::{LayerInstance, Level, Project};
-use sola_raylib::{color::Color, drawing::{RaylibDraw, RaylibDrawHandle}, math::{Rectangle, Vector2}};
+use sola_raylib::{color::Color, drawing::{RaylibDraw}, math::{Rectangle, Vector2}};
 
 use crate::{core::asset_manager::get_asset_manager, globals::glob};
 

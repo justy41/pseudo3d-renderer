@@ -1,11 +1,10 @@
 mod core;
 mod globals;
-use sola_raylib::{ffi::SetTextureFilter, prelude::*};
+use sola_raylib::{prelude::*};
 use crate::{core::{asset_manager::get_asset_manager, editor::Editor, pseudo_renderer::PseudoRenderer}, globals::glob};
 
 /*
 TODO:
-    Add deleting sprites
     Saving placed Textures (that means + Layers)
     
     Fix Background layer pixel jitter problem
@@ -24,7 +23,7 @@ fn main() {
         .resizable()
         .build();
     rl.set_target_fps(60);
-    let mut delta_time: f32 = 0.;
+    let mut delta_time: f32;
     
     let mut target = rl.load_render_texture(&thread, gw, gh).unwrap();
     target.set_texture_filter(&thread, TextureFilter::TEXTURE_FILTER_POINT);
@@ -50,6 +49,7 @@ fn main() {
         }
         
         pseudo_renderer.update(&mut rl, delta_time);
+        pseudo_renderer.after_update(&mut rl, delta_time);
         
         // DRAW on render texture
         {
@@ -71,4 +71,6 @@ fn main() {
             Color::WHITE
         );
     }
+    
+    get_asset_manager().unload_textures();
 }

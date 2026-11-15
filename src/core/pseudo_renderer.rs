@@ -1,6 +1,6 @@
-use std::{collections::HashMap, default, rc::Rc};
+use std::{rc::Rc};
 
-use sola_raylib::{ffi::{GetScreenHeight, GetScreenToWorld2D, GetScreenWidth}, prelude::*};
+use sola_raylib::{ffi::{GetScreenToWorld2D}, prelude::*};
 
 use crate::{core::{editor::Editor, layer::{self, Layer}, tilemap::Tilemap}, globals::glob};
 
@@ -76,6 +76,12 @@ impl PseudoRenderer {
         if glob().debug {
             Rc::get_mut(&mut self.editor).unwrap().update(rl, delta_time, &selected_camera);
             self.editor.update_current_layer(rl, &mut self.layers[self.selected_layer]);
+        }
+    }
+    
+    pub fn after_update(&mut self, rl: &mut RaylibHandle, delta_time: f32) {
+        if glob().debug {
+            Rc::get_mut(&mut self.editor).unwrap().after_update(rl, delta_time, &mut self.layers[self.selected_layer]);
         }
     }
     

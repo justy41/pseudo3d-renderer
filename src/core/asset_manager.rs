@@ -1,4 +1,4 @@
-use std::{collections::HashMap, fs, path::PathBuf, sync::{Mutex, MutexGuard, OnceLock}};
+use std::{collections::HashMap, fs, sync::{Mutex, MutexGuard, OnceLock}};
 use sola_raylib::{RaylibHandle, RaylibThread, texture::Texture2D};
 
 #[derive(Debug)]
@@ -44,5 +44,10 @@ impl AssetManager {
     
     pub fn get_texture_names(&self) -> Vec<String> {
         return self.texture_names.clone();
+    }
+    
+    pub fn unload_textures(&mut self) {
+        // Texture2D implements the Drop trait so it will automatically unload textures
+        self.textures.clear();
     }
 }
