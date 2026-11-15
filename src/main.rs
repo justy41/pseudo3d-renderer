@@ -23,6 +23,7 @@ fn main() {
         .title("renderer 3d")
         .resizable()
         .build();
+    rl.set_target_fps(60);
     let mut delta_time: f32 = 0.;
     
     let mut target = rl.load_render_texture(&thread, gw, gh).unwrap();
