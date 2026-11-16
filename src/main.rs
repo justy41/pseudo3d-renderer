@@ -30,7 +30,7 @@ impl GameContext {
             .build();
         rl.set_target_fps(60);
         
-        // Order matters
+        // Order matters here
         // This...
         get_asset_manager().get_pngs_from_folder(&mut rl, &thread, "assets").unwrap();
         get_asset_manager().get_pngs_from_folder(&mut rl, &thread, "assets/decorations").unwrap();
