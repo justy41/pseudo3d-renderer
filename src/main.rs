@@ -9,6 +9,7 @@ use crate::{core::{asset_manager::get_asset_manager, editor::Editor, pseudo_rend
 
 /*
 TODO:
+    Check scene system
     Saving placed Textures (that means + Layers)
     
     Fix Background layer pixel jitter problem
