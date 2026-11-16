@@ -2,18 +2,17 @@ use std::{rc::Rc};
 
 use sola_raylib::{ffi::{GetScreenToWorld2D}, prelude::*};
 
-use crate::{core::{editor::Editor, layer::{self, Layer}, tilemap::Tilemap}, globals::glob};
+use crate::{GameContext, core::{editor::Editor, layer::{self, Layer}, tilemap::Tilemap}, globals::glob};
 
 pub struct PseudoRenderer {
     pub layers: Vec<Layer>,
     pub camera: Camera2D,
     selected_layer: usize,
-    editor: Rc<Editor>,
     tilemap: Tilemap,
 }
 
 impl PseudoRenderer {
-    pub fn new(rl: &mut RaylibHandle, thread: &RaylibThread, editor: Editor) -> Self {
+    pub fn new(ctx: &mut GameContext) -> Self {
         let layers = vec![
             Layer::new("Background", 0.8),
             Layer::new("Ground", 1.0),
@@ -24,29 +23,28 @@ impl PseudoRenderer {
             layers: layers,
             camera: Camera2D { offset: Vector2::new(0., 0.), target: Vector2::new(0., 0.), rotation: 0., zoom: 1. },
             selected_layer: 0,
-            editor: Rc::new(editor),
             tilemap: Tilemap::new(8),
         }
     }
     
-    pub fn update(&mut self, rl: &mut RaylibHandle, delta_time: f32) {
+    pub fn update(&mut self, ctx: &mut GameContext) {
         // Processing input
-        glob().mouse_position = rl.get_mouse_position();
+        glob().mouse_position = ctx.rl.get_mouse_position();
         
-        if rl.is_key_down(KeyboardKey::KEY_A) {
-            self.camera.target.x -= 100. * delta_time;
+        if ctx.rl.is_key_down(KeyboardKey::KEY_A) {
+            self.camera.target.x -= 100. * ctx.dt;
         }
-        else if rl.is_key_down(KeyboardKey::KEY_D) {
-            self.camera.target.x += 100. * delta_time;
+        else if ctx.rl.is_key_down(KeyboardKey::KEY_D) {
+            self.camera.target.x += 100. * ctx.dt;
         }
         
         if glob().debug {
-            if rl.is_key_pressed(KeyboardKey::KEY_UP) {
+            if ctx.rl.is_key_pressed(KeyboardKey::KEY_UP) {
                 self.selected_layer = self.selected_layer.saturating_sub(1);
                 self.selected_layer = self.selected_layer.clamp(0, self.layers.len()-1);
                 println!("Current texture layer: {}", self.layers[self.selected_layer].name);
             }
-            else if rl.is_key_pressed(KeyboardKey::KEY_DOWN) {
+            else if ctx.rl.is_key_pressed(KeyboardKey::KEY_DOWN) {
                 self.selected_layer = self.selected_layer.saturating_add(1);
                 self.selected_layer = self.selected_layer.clamp(0, self.layers.len()-1);
                 println!("Current texture layer: {}", self.layers[self.selected_layer].name);
@@ -60,8 +58,8 @@ impl PseudoRenderer {
         {
             let mut g = glob();
             
-            g.mouse_position.x = (g.mouse_position.x - (rl.get_screen_width() as f32 - (g.game_width as f32 * g.scale))*0.5)/g.scale;
-            g.mouse_position.y = (g.mouse_position.y - (rl.get_screen_height() as f32 - (g.game_height as f32 * g.scale))*0.5)/g.scale;
+            g.mouse_position.x = (g.mouse_position.x - (ctx.rl.get_screen_width() as f32 - (g.game_width as f32 * g.scale))*0.5)/g.scale;
+            g.mouse_position.y = (g.mouse_position.y - (ctx.rl.get_screen_height() as f32 - (g.game_height as f32 * g.scale))*0.5)/g.scale;
         }
         
         // Adding the camera scaling into consideration
@@ -70,22 +68,22 @@ impl PseudoRenderer {
         }.into();
         
         // Updating tilemap
-        self.tilemap.update(delta_time);
+        self.tilemap.update(ctx.dt);
         
         // Updating editor
         if glob().debug {
-            Rc::get_mut(&mut self.editor).unwrap().update(rl, delta_time, &selected_camera);
-            self.editor.update_current_layer(rl, &mut self.layers[self.selected_layer]);
+            ctx.editor.update(&mut ctx.rl, ctx.dt, &selected_camera);
+            ctx.editor.update_current_layer(&mut ctx.rl, &mut self.layers[self.selected_layer]);
         }
     }
     
-    pub fn after_update(&mut self, rl: &mut RaylibHandle, delta_time: f32) {
+    pub fn after_update(&mut self, ctx: &mut GameContext) {
         if glob().debug {
-            Rc::get_mut(&mut self.editor).unwrap().after_update(rl, delta_time, &mut self.layers[self.selected_layer]);
+            ctx.editor.after_update(&mut ctx.rl, ctx.dt, &mut self.layers[self.selected_layer]);
         }
     }
     
-    pub fn render(&mut self, batch: &mut impl RaylibDraw) {
+    pub fn render(&mut self, batch: &mut impl RaylibDraw, editor: &mut Editor) {
         for i in 0..self.layers.len() {
             let c = self.get_layer_camera(i);
                         
@@ -117,12 +115,12 @@ impl PseudoRenderer {
         
         // Debug rendering the editor
         if glob().debug {
-            Rc::get_mut(&mut self.editor).unwrap().render(batch); // Draw using the normal batch (for showing textures in the corner)
+            editor.render(batch); // Draw using the normal batch (for showing textures in the corner)
             
             let c = self.get_layer_camera(self.selected_layer);
             let mut mode2d = batch.begin_mode2D(c);
             
-            Rc::get_mut(&mut self.editor).unwrap().render_mode2d(&mut mode2d); // Draw using the camera zoom (for texture placement)
+            editor.render_mode2d(&mut mode2d); // Draw using the camera zoom (for texture placement)
         }
     }
     
