@@ -1,4 +1,4 @@
-mod Game;
+mod game;
 mod scenes;
 mod core;
 mod globals;
