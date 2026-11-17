@@ -1,8 +1,7 @@
-mod game;
 mod scenes;
 mod core;
 mod globals;
-use std::rc::Rc;
+mod game;
 
 use sola_raylib::{prelude::*};
 use crate::{core::{asset_manager::get_asset_manager, editor::Editor, pseudo_renderer::PseudoRenderer}, globals::glob};
@@ -13,7 +12,7 @@ TODO:
     Saving placed Textures (that means + Layers)
     
     Fix Background layer pixel jitter problem
-*/       
+*/
 
 pub struct GameContext {
     rl: RaylibHandle,
