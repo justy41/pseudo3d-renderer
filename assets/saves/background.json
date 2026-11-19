@@ -1,0 +1,50 @@
+[
+  {
+    "texture_id": "decs_sprite_007_24x128.png",
+    "x": 25.0,
+    "y": 72.0,
+    "width": 24.0,
+    "height": 128.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_007_24x128.png",
+    "x": 74.0,
+    "y": 66.0,
+    "width": 24.0,
+    "height": 128.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_007_24x128.png",
+    "x": 79.0,
+    "y": 67.0,
+    "width": 24.0,
+    "height": 128.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_007_24x128.png",
+    "x": 185.0,
+    "y": 57.0,
+    "width": 24.0,
+    "height": 128.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_007_24x128.png",
+    "x": 298.0,
+    "y": 31.0,
+    "width": 24.0,
+    "height": 128.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_007_24x128.png",
+    "x": 313.0,
+    "y": 31.0,
+    "width": 24.0,
+    "height": 128.0,
+    "rotation": 0.0
+  }
+]

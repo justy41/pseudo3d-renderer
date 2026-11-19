@@ -1,0 +1,90 @@
+[
+  {
+    "texture_id": "decs_sprite_014_11x3.png",
+    "x": 52.0,
+    "y": 134.0,
+    "width": 11.0,
+    "height": 3.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_017_7x7.png",
+    "x": 96.0,
+    "y": 134.0,
+    "width": 7.0,
+    "height": 7.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_016_4x5.png",
+    "x": 109.0,
+    "y": 132.0,
+    "width": 4.0,
+    "height": 5.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_012_4x3.png",
+    "x": 117.0,
+    "y": 133.0,
+    "width": 4.0,
+    "height": 3.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_012_4x3.png",
+    "x": 115.0,
+    "y": 133.0,
+    "width": 4.0,
+    "height": 3.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_011_8x4.png",
+    "x": 120.0,
+    "y": 133.0,
+    "width": 8.0,
+    "height": 4.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_011_8x4.png",
+    "x": 87.0,
+    "y": 133.0,
+    "width": 8.0,
+    "height": 4.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_002_17x24.png",
+    "x": 149.0,
+    "y": 90.0,
+    "width": 17.0,
+    "height": 24.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_003_13x20.png",
+    "x": 167.0,
+    "y": 95.0,
+    "width": 13.0,
+    "height": 20.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_002_17x24.png",
+    "x": 291.0,
+    "y": 69.0,
+    "width": 17.0,
+    "height": 24.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_004_13x14.png",
+    "x": 273.0,
+    "y": 75.0,
+    "width": 13.0,
+    "height": 14.0,
+    "rotation": 0.0
+  }
+]

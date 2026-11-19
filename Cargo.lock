@@ -235,6 +235,8 @@ name = "renderer3d"
 version = "0.1.0"
 dependencies = [
  "ldtk_rust",
+ "serde",
+ "serde_json",
  "sola-raylib",
 ]
 

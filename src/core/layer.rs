@@ -1,6 +1,17 @@
-use sola_raylib::{color::Color, drawing::RaylibDraw, math::{Rectangle, Vector2}};
+use sola_raylib::{
+    color::Color,
+    drawing::RaylibDraw,
+    math::{Rectangle, Vector2},
+};
+use std::{
+    fs, io,
+    path::{Path, PathBuf},
+};
 
-use crate::{core::{asset_manager::get_asset_manager, entity::Entity}, globals::glob};
+use crate::{
+    core::{asset_manager::get_asset_manager, entity::Entity},
+    globals::glob,
+};
 
 pub struct Layer {
     pub name: String,
@@ -18,34 +29,86 @@ impl Layer {
             remove_entity_indexes: Vec::new(),
         }
     }
-    
+
+    pub fn save(&self) -> io::Result<PathBuf> {
+        let directory = Path::new("assets").join("saves");
+        fs::create_dir_all(&directory)?;
+
+        let filename = self
+            .name
+            .chars()
+            .map(|character| {
+                if character.is_ascii_alphanumeric() {
+                    character.to_ascii_lowercase()
+                } else {
+                    '_'
+                }
+            })
+            .collect::<String>();
+        let path = directory.join(format!("{filename}.json"));
+        let json = serde_json::to_vec_pretty(&self.entities)
+            .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error))?;
+        fs::write(&path, json)?;
+        Ok(path)
+    }
+
+    pub fn load(&mut self) -> io::Result<()> {
+        let filename = self
+            .name
+            .chars()
+            .map(|character| {
+                if character.is_ascii_alphanumeric() {
+                    character.to_ascii_lowercase()
+                } else {
+                    '_'
+                }
+            })
+            .collect::<String>();
+        let path = Path::new("assets")
+            .join("saves")
+            .join(format!("{filename}.json"));
+
+        if !path.exists() {
+            return Ok(());
+        }
+
+        let json = fs::read_to_string(&path)?;
+        self.entities = serde_json::from_str(&json)
+            .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error))?;
+        self.remove_entity_indexes.clear();
+        Ok(())
+    }
+
     pub fn add_entity(&mut self, x: f32, y: f32, tex: &str) {
         println!("added entity");
         let texture_w = get_asset_manager().textures[tex].width;
         let texture_h = get_asset_manager().textures[tex].height;
-        self.entities.push(Entity::new(x, y, texture_w as f32, texture_h as f32, tex));
+        self.entities
+            .push(Entity::new(x, y, texture_w as f32, texture_h as f32, tex));
     }
-    
+
     pub fn remove_entity(&mut self) {
         for (i, entity) in self.entities.iter_mut().enumerate() {
             let wmp = glob().world_mouse_position;
-            if Rectangle::new(entity.x, entity.y, entity.width, entity.height).check_collision_point_rec(wmp) {
+            if Rectangle::new(entity.x, entity.y, entity.width, entity.height)
+                .check_collision_point_rec(wmp)
+            {
                 self.remove_entity_indexes.push(i);
                 break;
             }
         }
     }
-    
+
     pub fn process_entity_deletion(&mut self) {
         if !self.remove_entity_indexes.is_empty() {
-                for i in self.remove_entity_indexes.iter() {
-                    self.entities.swap_remove(*i);
-                }
-            
+            for i in self.remove_entity_indexes.iter() {
+                self.entities.swap_remove(*i);
+            }
+
             self.remove_entity_indexes.clear();
         }
     }
-    
+
     pub fn draw_textures(&mut self, batch: &mut impl RaylibDraw, tint: Option<Color>) {
         for entity in &self.entities {
             match get_asset_manager().textures.get(&entity.texture_id) {
@@ -56,7 +119,7 @@ impl Layer {
                     Rectangle::new(entity.x, entity.y, tex.width as f32, tex.height as f32),
                     Vector2::zero(),
                     entity.rotation,
-                    tint.unwrap_or(Color::WHITE)
+                    tint.unwrap_or(Color::WHITE),
                 ),
                 None => eprintln!("Missing texture '{}'", entity.texture_id),
             }
