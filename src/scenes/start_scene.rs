@@ -1,29 +1,29 @@
-use crate::{core::entity::Entity, scenes::scene::Scene};
+use crate::{core::sprite::Sprite, scenes::scene::Scene};
 
 pub struct StartScene {
-    entities: Vec<Entity>,
+    sprites: Vec<Sprite>,
 }
 
 impl Scene for StartScene {
     fn new() -> Self {
         Self {
-            entities: Vec::new(),
+            sprites: Vec::new(),
         }
     }
 
     fn start(&self) {
-        // Load entities
+        // Load sprites
     }
 
     fn on_update(&mut self, delta_time: f32) {
-        // Update entities
+        // Update sprites
     }
 
     fn on_render(&mut self) {
         // Render entities
     }
     
-    fn get_entities(&mut self) -> &mut Vec<Entity> {
-        &mut self.entities
+    fn get_sprites(&mut self) -> &mut Vec<Sprite> {
+        &mut self.sprites
     }
 }

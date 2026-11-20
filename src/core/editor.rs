@@ -1,4 +1,4 @@
-use sola_raylib::{RaylibHandle, camera::Camera2D, color::Color, drawing::{RaylibDraw, RaylibDrawHandle}, ffi::MouseButton, math::Vector2, texture::Texture2D};
+use sola_raylib::{RaylibHandle, camera::Camera2D, color::Color, drawing::{RaylibDraw}, ffi::MouseButton};
 
 use crate::{core::{asset_manager::get_asset_manager, layer::{self, Layer}}, globals::glob};
 
@@ -34,17 +34,17 @@ impl Editor {
         if rl.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_LEFT) {
             let mouse_pos = glob().world_mouse_position;
             let texture_name = get_asset_manager().get_texture_names()[self.selected_texture as usize].to_string();
-            selected_layer.add_entity(mouse_pos.x.trunc(), mouse_pos.y.trunc(), &texture_name);
+            selected_layer.add_sprite(mouse_pos.x.trunc(), mouse_pos.y.trunc(), &texture_name);
         }
         
         if rl.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_RIGHT) {
-            selected_layer.remove_entity();
+            selected_layer.remove_sprite();
         }
     }
     
     // Handles texture deletion after update (so it doesnt conflict with the for loops)
     pub fn after_update(&mut self, rl: &mut RaylibHandle, delta_time: f32, selected_layer: &mut Layer) {
-        selected_layer.process_entity_deletion();
+        selected_layer.process_sprite_deletion();
     }
     
     // Render the selected texture in the corner
