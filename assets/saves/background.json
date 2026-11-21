@@ -1,50 +1,282 @@
 [
   {
-    "texture_id": "decs_sprite_007_24x128.png",
-    "x": 25.0,
-    "y": 72.0,
-    "width": 24.0,
-    "height": 128.0,
+    "texture_id": "decs_sprite_009_49x49.png",
+    "x": 929.0,
+    "y": 494.0,
+    "width": 392.0,
+    "height": 392.0,
     "rotation": 0.0
   },
   {
-    "texture_id": "decs_sprite_007_24x128.png",
-    "x": 74.0,
-    "y": 66.0,
-    "width": 24.0,
-    "height": 128.0,
+    "texture_id": "decs_sprite_009_49x49.png",
+    "x": 649.0,
+    "y": 447.0,
+    "width": 392.0,
+    "height": 392.0,
     "rotation": 0.0
   },
   {
-    "texture_id": "decs_sprite_007_24x128.png",
-    "x": 79.0,
-    "y": 67.0,
-    "width": 24.0,
-    "height": 128.0,
+    "texture_id": "decs_sprite_009_49x49.png",
+    "x": 827.0,
+    "y": 442.0,
+    "width": 392.0,
+    "height": 392.0,
     "rotation": 0.0
   },
   {
-    "texture_id": "decs_sprite_007_24x128.png",
-    "x": 185.0,
-    "y": 57.0,
-    "width": 24.0,
-    "height": 128.0,
+    "texture_id": "decs_sprite_009_49x49.png",
+    "x": 1047.0,
+    "y": 359.0,
+    "width": 392.0,
+    "height": 392.0,
     "rotation": 0.0
   },
   {
-    "texture_id": "decs_sprite_007_24x128.png",
-    "x": 298.0,
-    "y": 31.0,
-    "width": 24.0,
-    "height": 128.0,
+    "texture_id": "decs_sprite_009_49x49.png",
+    "x": 1144.0,
+    "y": 344.0,
+    "width": 392.0,
+    "height": 392.0,
     "rotation": 0.0
   },
   {
-    "texture_id": "decs_sprite_007_24x128.png",
-    "x": 313.0,
-    "y": 31.0,
-    "width": 24.0,
-    "height": 128.0,
+    "texture_id": "decs_sprite_009_49x49.png",
+    "x": 1814.0,
+    "y": 264.0,
+    "width": 392.0,
+    "height": 392.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_009_49x49.png",
+    "x": 2029.0,
+    "y": 174.0,
+    "width": 392.0,
+    "height": 392.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_009_49x49.png",
+    "x": 2182.0,
+    "y": 139.0,
+    "width": 392.0,
+    "height": 392.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_010_44x35.png",
+    "x": 1724.0,
+    "y": 427.0,
+    "width": 352.0,
+    "height": 280.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_010_44x35.png",
+    "x": 1527.0,
+    "y": 364.0,
+    "width": 352.0,
+    "height": 280.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_010_44x35.png",
+    "x": 1842.0,
+    "y": 254.0,
+    "width": 352.0,
+    "height": 280.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_010_44x35.png",
+    "x": 1412.0,
+    "y": 439.0,
+    "width": 352.0,
+    "height": 280.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_010_44x35.png",
+    "x": 1227.0,
+    "y": 359.0,
+    "width": 352.0,
+    "height": 280.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_010_44x35.png",
+    "x": 557.0,
+    "y": 574.0,
+    "width": 352.0,
+    "height": 280.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_010_44x35.png",
+    "x": 327.0,
+    "y": 654.0,
+    "width": 352.0,
+    "height": 280.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_010_44x35.png",
+    "x": 2399.0,
+    "y": 259.0,
+    "width": 352.0,
+    "height": 280.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_010_44x35.png",
+    "x": 2447.0,
+    "y": 312.0,
+    "width": 352.0,
+    "height": 280.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_010_44x35.png",
+    "x": 2659.0,
+    "y": 232.0,
+    "width": 352.0,
+    "height": 280.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_010_44x35.png",
+    "x": 2884.0,
+    "y": 209.0,
+    "width": 352.0,
+    "height": 280.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_009_49x49.png",
+    "x": 94.0,
+    "y": 592.0,
+    "width": 392.0,
+    "height": 392.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_019_37x51.png",
+    "x": 1026.0,
+    "y": 1129.0,
+    "width": 296.0,
+    "height": 408.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_019_37x51.png",
+    "x": 1761.0,
+    "y": 892.0,
+    "width": 296.0,
+    "height": 408.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_019_37x51.png",
+    "x": 2019.0,
+    "y": 837.0,
+    "width": 296.0,
+    "height": 408.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_019_37x51.png",
+    "x": 1257.0,
+    "y": 1159.0,
+    "width": 296.0,
+    "height": 408.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_019_37x51.png",
+    "x": 1347.0,
+    "y": 1152.0,
+    "width": 296.0,
+    "height": 408.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_019_37x51.png",
+    "x": 1975.0,
+    "y": 942.0,
+    "width": 296.0,
+    "height": 408.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_019_37x51.png",
+    "x": 2092.0,
+    "y": 924.0,
+    "width": 296.0,
+    "height": 408.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_019_37x51.png",
+    "x": 2280.0,
+    "y": 892.0,
+    "width": 296.0,
+    "height": 408.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_019_37x51.png",
+    "x": 1197.0,
+    "y": 1189.0,
+    "width": 296.0,
+    "height": 408.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_020_47x56.png",
+    "x": 1197.0,
+    "y": 1109.0,
+    "width": 376.0,
+    "height": 448.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_020_47x56.png",
+    "x": 1660.0,
+    "y": 997.0,
+    "width": 376.0,
+    "height": 448.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_020_47x56.png",
+    "x": 1390.0,
+    "y": 1119.0,
+    "width": 376.0,
+    "height": 448.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_019_37x51.png",
+    "x": 1036.0,
+    "y": 1292.0,
+    "width": 296.0,
+    "height": 408.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_019_37x51.png",
+    "x": 973.0,
+    "y": 1327.0,
+    "width": 296.0,
+    "height": 408.0,
+    "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_019_37x51.png",
+    "x": 883.0,
+    "y": 1342.0,
+    "width": 296.0,
+    "height": 408.0,
     "rotation": 0.0
   }
 ]

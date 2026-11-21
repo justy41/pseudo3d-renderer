@@ -30,9 +30,9 @@ impl Globals {
             scale: 0.,
             screen_width: 1280,
             screen_height: 720,
-            game_width: 320,
-            game_height: 180,
-            pix_per_unit: 16,
+            game_width: 2560,
+            game_height: 1440,
+            pix_per_unit: 8,
         }
     }
     
