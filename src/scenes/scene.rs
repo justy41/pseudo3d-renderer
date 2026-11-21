@@ -1,23 +1,27 @@
-use crate::core::sprite::Sprite;
+use sola_raylib::{color::Color, drawing::{RaylibDraw, RaylibDrawHandle}, math::Vector2};
+
+use crate::{GameContext, core::entity::Entity, globals::glob};
 
 pub trait Scene {
     fn new() -> Self;
-    fn start(&self);
-    fn update(&mut self, ctx: &mut crate::GameContext) {
-        for sprite in self.get_sprites() {
-            // sprite.update ...
+    fn on_start(&mut self);
+    fn update(&mut self, ctx: &mut GameContext) {
+        for entity in self.get_entities() {
+            // entity.update ...
         }
         
         self.on_update(ctx);
     }
-    fn on_update(&mut self, ctx: &mut crate::GameContext);
-    fn render(&mut self) {
-        for sprite in self.get_sprites() {
-            // sprite.draw ...
+    fn on_update(&mut self, ctx: &mut GameContext);
+    fn render(&mut self, batch: &mut RaylibDrawHandle) {
+        for entity in self.get_entities() {
+            if glob().debug {
+                batch.draw_rectangle_pro(entity.get_rect(), Vector2::zero(), 0., Color::RED);
+            }
         }
         
-        self.on_render();
+        self.on_render(batch);
     }
-    fn on_render(&mut self);
-    fn get_sprites(&mut self) -> &mut Vec<Sprite>;
+    fn on_render(&mut self, batch: &mut RaylibDrawHandle);
+    fn get_entities(&mut self) -> &mut Vec<Box<dyn Entity>>;
 }

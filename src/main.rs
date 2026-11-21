@@ -2,9 +2,10 @@ mod scenes;
 mod core;
 mod globals;
 mod game;
+mod entities;
 
 use sola_raylib::{prelude::*};
-use crate::{core::{asset_manager::get_asset_manager, editor::Editor, pseudo_renderer::PseudoRenderer}, globals::glob};
+use crate::{core::{asset_manager::get_asset_manager, editor::Editor, pseudo_renderer::PseudoRenderer}, game::Game, globals::glob};
 
 /*
 TODO:
@@ -57,6 +58,7 @@ fn main() {
     let mut scale; // Scaling ratio
     
     let mut ctx = GameContext::new(sw, sh);
+    let mut game = Game::new();
     let mut pseudo_renderer = PseudoRenderer::new(&mut ctx);
     
     let mut target = ctx.rl.load_render_texture(&ctx.thread, gw, gh).unwrap();
@@ -75,6 +77,8 @@ fn main() {
             println!("Debug Mode: {}", debug);
         }
         
+        game.update(&mut ctx);
+        
         pseudo_renderer.update(&mut ctx);
         pseudo_renderer.after_update(&mut ctx);
         
@@ -82,6 +86,8 @@ fn main() {
         {
             let mut batch = ctx.rl.begin_texture_mode(&ctx.thread, &mut target);
             batch.clear_background(Color::WHITE);
+            
+            game.render(batch);
             pseudo_renderer.render(&mut batch, &mut ctx.editor);
         }
         

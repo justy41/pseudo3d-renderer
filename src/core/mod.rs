@@ -4,3 +4,4 @@ pub mod sprite;
 pub mod layer;
 pub mod editor;
 pub mod pseudo_renderer;
+pub mod entity;

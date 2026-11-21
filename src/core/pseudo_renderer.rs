@@ -73,6 +73,11 @@ impl PseudoRenderer {
         } else if ctx.rl.is_key_down(KeyboardKey::KEY_D) {
             self.camera.target.x += 1000. * ctx.dt;
         }
+        if ctx.rl.is_key_down(KeyboardKey::KEY_W) {
+            self.camera.target.y -= 1000. * ctx.dt;
+        } else if ctx.rl.is_key_down(KeyboardKey::KEY_S) {
+            self.camera.target.y += 1000. * ctx.dt;
+        }
 
         if glob().debug {
             if ctx.rl.is_key_pressed(KeyboardKey::KEY_UP) {
