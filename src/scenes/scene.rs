@@ -3,14 +3,14 @@ use crate::core::sprite::Sprite;
 pub trait Scene {
     fn new() -> Self;
     fn start(&self);
-    fn update(&mut self, delta_time: f32) {
+    fn update(&mut self, ctx: &mut crate::GameContext) {
         for sprite in self.get_sprites() {
             // sprite.update ...
         }
         
-        self.on_update(delta_time);
+        self.on_update(ctx);
     }
-    fn on_update(&mut self, delta_time: f32);
+    fn on_update(&mut self, ctx: &mut crate::GameContext);
     fn render(&mut self) {
         for sprite in self.get_sprites() {
             // sprite.draw ...

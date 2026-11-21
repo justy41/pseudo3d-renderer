@@ -1,4 +1,4 @@
-use crate::{core::sprite::Sprite, scenes::scene::Scene};
+use crate::{GameContext, core::sprite::Sprite, scenes::scene::Scene};
 
 pub struct StartScene {
     sprites: Vec<Sprite>,
@@ -15,7 +15,7 @@ impl Scene for StartScene {
         // Load sprites
     }
 
-    fn on_update(&mut self, delta_time: f32) {
+    fn on_update(&mut self, ctx: &mut GameContext) {
         // Update sprites
     }
 

@@ -6,6 +6,7 @@ use crate::{core::asset_manager::get_asset_manager, globals::glob};
 pub struct Tilemap {
     ldtk: Project,
     tile_size: i32,
+    ppu: f32,
 }
 
 impl Tilemap {
@@ -14,6 +15,7 @@ impl Tilemap {
         Self {
             ldtk: ldtk,
             tile_size: tile_size,
+            ppu: glob().pix_per_unit as f32,
         }
     }
     
@@ -37,8 +39,8 @@ impl Tilemap {
         for tile in layer.auto_layer_tiles.iter() {
             batch.draw_texture_pro(
                 &get_asset_manager().textures[&glob().get_filename_from_path(layer.tileset_rel_path.clone().unwrap())],
-                Rectangle::new(tile.src[0] as f32, tile.src[1] as f32, self.tile_size as f32, self.tile_size as f32),
-                Rectangle::new(tile.px[0] as f32 + layer.px_offset_x as f32, tile.px[1] as f32 + layer.px_offset_y as f32, self.tile_size as f32, self.tile_size as f32),
+                Rectangle::new(tile.src[0] as f32 * self.ppu, tile.src[1] as f32 * self.ppu, self.tile_size as f32 * self.ppu, self.tile_size as f32 * self.ppu),
+                Rectangle::new((tile.px[0] as f32 + layer.px_offset_x as f32)*self.ppu, (tile.px[1] as f32 + layer.px_offset_y as f32)*self.ppu, self.tile_size as f32 * self.ppu, self.tile_size as f32 * self.ppu),
                 Vector2::zero(),
                 0.,
                 Color::WHITE

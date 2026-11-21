@@ -1,5 +1,7 @@
 use std::{collections::HashMap, fs, sync::{Mutex, MutexGuard, OnceLock}};
-use sola_raylib::{RaylibHandle, RaylibThread, texture::Texture2D};
+use sola_raylib::{RaylibHandle, RaylibThread, texture::{Image, Texture2D}};
+
+use crate::globals::glob;
 
 #[derive(Debug)]
 pub struct AssetManager {
@@ -31,8 +33,15 @@ impl AssetManager {
                 if path.is_file() {
                     if let Some(ext) = path.extension() {
                         if ext.eq_ignore_ascii_case("png") {
-                            self.textures.insert(path.file_name().unwrap().to_str().unwrap().to_string(), rl.load_texture(thread, path.to_str().unwrap()).unwrap());
+                            let mut image = Image::load_image(path.to_str().unwrap()).unwrap();
+                            
+                            let ppu = glob().pix_per_unit;
+                            image.resize_nn(image.width*ppu, image.height*ppu);
+                                                        
+                            self.textures.insert(path.file_name().unwrap().to_str().unwrap().to_string(), rl.load_texture_from_image(thread, &image).unwrap());
                             self.texture_names.push(path.file_name().unwrap().to_str().unwrap().to_string());
+                            
+                            // "image" is unloaded automatically when it goes out of scope.
                         }
                     }
                 }

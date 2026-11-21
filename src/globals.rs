@@ -1,6 +1,8 @@
 use std::{sync::{Mutex, MutexGuard, OnceLock}};
-
 use sola_raylib::math::Vector2;
+
+// Global struct to hold global variables for ease of access. It uses the singleton pattern.
+// Can be used as "settings" for the game project.
 
 #[derive(Debug)]
 pub struct Globals {
@@ -12,6 +14,7 @@ pub struct Globals {
     pub screen_height: u32,
     pub game_width: u32,
     pub game_height: u32,
+    pub pix_per_unit: i32,
 }
 
 static GLOBAL: OnceLock<Mutex<Globals>> = OnceLock::new();
@@ -29,8 +32,9 @@ impl Globals {
             scale: 0.,
             screen_width: 1280,
             screen_height: 720,
-            game_width: 320,
-            game_height: 180,
+            game_width: 2560,
+            game_height: 1440,
+            pix_per_unit: 8,
         }
     }
     
