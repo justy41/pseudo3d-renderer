@@ -16,7 +16,7 @@ use crate::{
 pub struct Layer {
     pub name: String,
     pub scale: f32,
-    pub entities: Vec<Sprite>,
+    pub sprites: Vec<Sprite>,
     pub remove_sprite_indexes: Vec<usize>,
 }
 
@@ -25,7 +25,7 @@ impl Layer {
         Self {
             name: name.to_string(),
             scale,
-            entities: Vec::new(),
+            sprites: Vec::new(),
             remove_sprite_indexes: Vec::new(),
         }
     }
@@ -46,7 +46,7 @@ impl Layer {
             })
             .collect::<String>();
         let path = directory.join(format!("{filename}.json"));
-        let json = serde_json::to_vec_pretty(&self.entities)
+        let json = serde_json::to_vec_pretty(&self.sprites)
             .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error))?;
         fs::write(&path, json)?;
         Ok(path)
@@ -73,7 +73,7 @@ impl Layer {
         }
 
         let json = fs::read_to_string(&path)?;
-        self.entities = serde_json::from_str(&json)
+        self.sprites = serde_json::from_str(&json)
             .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error))?;
         self.remove_sprite_indexes.clear();
         Ok(())
@@ -83,12 +83,12 @@ impl Layer {
         println!("added sprite");
         let texture_w = get_asset_manager().textures[tex].width;
         let texture_h = get_asset_manager().textures[tex].height;
-        self.entities
+        self.sprites
             .push(Sprite::new(x, y, texture_w as f32, texture_h as f32, tex));
     }
 
     pub fn remove_sprite(&mut self) {
-        for (i, sprite) in self.entities.iter_mut().enumerate() {
+        for (i, sprite) in self.sprites.iter_mut().enumerate() {
             let wmp = glob().world_mouse_position;
             if Rectangle::new(sprite.x, sprite.y, sprite.width, sprite.height)
                 .check_collision_point_rec(wmp)
@@ -102,7 +102,7 @@ impl Layer {
     pub fn process_sprite_deletion(&mut self) {
         if !self.remove_sprite_indexes.is_empty() {
             for i in self.remove_sprite_indexes.iter() {
-                self.entities.swap_remove(*i);
+                self.sprites.swap_remove(*i);
             }
 
             self.remove_sprite_indexes.clear();
@@ -110,7 +110,7 @@ impl Layer {
     }
 
     pub fn draw_textures(&mut self, batch: &mut impl RaylibDraw, tint: Option<Color>) {
-        for sprite in &self.entities {
+        for sprite in &self.sprites {
             match get_asset_manager().textures.get(&sprite.texture_id) {
                 //Some(tex) => batch.draw_texture(tex, sprite.x as i32, sprite.y as i32, tint.unwrap_or(Color::WHITE)),
                 Some(tex) => batch.draw_texture_pro(
