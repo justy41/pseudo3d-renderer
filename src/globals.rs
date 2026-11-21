@@ -1,6 +1,8 @@
 use std::{sync::{Mutex, MutexGuard, OnceLock}};
-
 use sola_raylib::math::Vector2;
+
+// Global struct to hold global variables for ease of access. It uses the singleton pattern.
+// Can be used as "settings" for the game project.
 
 #[derive(Debug)]
 pub struct Globals {
