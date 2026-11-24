@@ -1,4 +1,4 @@
-use sola_raylib::drawing::RaylibDrawHandle;
+use sola_raylib::drawing::{RaylibDraw, RaylibDrawHandle};
 
 use crate::{GameContext, core::{entity::Entity, sprite::Sprite}, entities::player::Player, scenes::scene::Scene};
 
@@ -24,7 +24,7 @@ impl Scene for StartScene {
         // Update entities
     }
 
-    fn on_render(&mut self, batch: &mut RaylibDrawHandle) {
+    fn on_render(&mut self, batch: &mut impl RaylibDraw) {
         // Render entities
     }
     

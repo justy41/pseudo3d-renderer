@@ -110,5 +110,13 @@
     "width": 136.0,
     "height": 192.0,
     "rotation": 0.0
+  },
+  {
+    "texture_id": "decs_sprite_004_13x14.png",
+    "x": 469.0,
+    "y": 985.0,
+    "width": 104.0,
+    "height": 112.0,
+    "rotation": 0.0
   }
 ]

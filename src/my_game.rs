@@ -1,4 +1,4 @@
-use sola_raylib::drawing::RaylibDrawHandle;
+use sola_raylib::drawing::{RaylibDraw, RaylibDrawHandle, RaylibTextureMode};
 
 use crate::{GameContext, scenes::{scene::Scene, start_scene::StartScene}};
 
@@ -20,7 +20,8 @@ impl Game {
         self.start_scene.update(ctx);
     }
     
-    pub fn render(&mut self, batch: &mut RaylibDrawHandle) {
+    pub fn render(&mut self, batch: &mut impl RaylibDraw) {
         self.start_scene.render(batch);
+        // rendering...
     }
 }

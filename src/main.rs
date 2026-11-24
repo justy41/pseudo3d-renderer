@@ -1,11 +1,11 @@
 mod scenes;
 mod core;
 mod globals;
-mod game;
 mod entities;
+mod my_game;
 
 use sola_raylib::{prelude::*};
-use crate::{core::{asset_manager::get_asset_manager, editor::Editor, pseudo_renderer::PseudoRenderer}, game::Game, globals::glob};
+use crate::{core::{asset_manager::get_asset_manager, editor::Editor, pseudo_renderer::PseudoRenderer}, globals::glob, my_game::Game};
 
 /*
 TODO:
@@ -87,7 +87,7 @@ fn main() {
             let mut batch = ctx.rl.begin_texture_mode(&ctx.thread, &mut target);
             batch.clear_background(Color::WHITE);
             
-            game.render(batch);
+            game.render(&mut batch);
             pseudo_renderer.render(&mut batch, &mut ctx.editor);
         }
         
