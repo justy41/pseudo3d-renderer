@@ -15,6 +15,7 @@ A 2D pseudo-3D renderer written in Rust with raylib. It renders a layered scene 
 
 - Rust and Cargo
 - A supported raylib development environment
+- [LLVM](https://llvm.org/) compiler chain
 
 ## Running
 
